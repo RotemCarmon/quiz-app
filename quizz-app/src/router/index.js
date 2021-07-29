@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import home from '../views/home.vue'
+import login from '../views/login.vue'
+import admin from '../views/admin.vue'
+import newQuiz from '../cmps/new-quiz.vue'
+import submissions from '../cmps/submissions.vue'
+import templates from '../cmps/templates.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +14,33 @@ const routes = [
     path: '/',
     name: 'Home',
     component: home
+  },
+  {
+    path: '/login',
+    name: 'Login Page',
+    component: login
+  },
+  {
+    path: '/admin',
+    name: 'Admin Page',
+    component: admin,
+    children:[
+      {
+        path:'/new-quiz',
+        name:'New Quiz',
+        component:newQuiz
+      },
+      {
+        path:'/submissions',
+        name:'Submissions',
+        component:submissions
+      },
+      {
+        path:'/templates',
+        name:'Templates',
+        component:templates
+      }
+    ]
   },
   {
     path: '/about',

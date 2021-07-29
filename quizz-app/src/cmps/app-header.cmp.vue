@@ -1,7 +1,7 @@
 <template>
   <header>
-      <router-link to="/home">Home</router-link>
-      <router-link to="/about">About</router-link>
+    <h1>MrQuiz</h1>
+      <router-link to="/">Home</router-link>
   </header>
 </template>
 
