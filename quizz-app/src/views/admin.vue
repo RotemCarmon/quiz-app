@@ -1,7 +1,7 @@
 <template>
   <div class="admin-page">
     <div class="tabs">
-      <router-link to="/new-quiz">New Quiz</router-link>
+      <router-link to="/quiz/edit">New Quiz</router-link>
       <router-link to="/submissions">Submissions</router-link>
       <router-link to="/templates">Templates</router-link>
     </div>
@@ -12,7 +12,7 @@
 <script>
 export default {
     created() {
-        this.$router.push('/new-quiz')
+        this.$router.push('/quiz/edit')
     },
 };
 </script>

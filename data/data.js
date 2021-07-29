@@ -24,6 +24,14 @@ const quiz = {
   _id: 't101',
   title: 'Quiz title',
   createdAt: 314938423780,
+  // sections:{
+  //   vue:{
+
+  //   },
+  //   js:{
+
+  //   }
+  // }
   sections: [
     {
       id: 's101',

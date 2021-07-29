@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import home from '../views/home.vue'
 import login from '../views/login.vue'
 import admin from '../views/admin.vue'
-import newQuiz from '../cmps/new-quiz.vue'
+import quizEdit from '../cmps/quiz-edit.vue'
 import submissions from '../cmps/submissions.vue'
 import templates from '../cmps/templates.vue'
 
@@ -26,9 +26,9 @@ const routes = [
     component: admin,
     children:[
       {
-        path:'/new-quiz',
-        name:'New Quiz',
-        component:newQuiz
+        path:'/quiz/edit',
+        name:'Quiz Edit',
+        component:quizEdit
       },
       {
         path:'/submissions',
