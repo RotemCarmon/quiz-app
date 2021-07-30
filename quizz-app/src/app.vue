@@ -7,7 +7,6 @@
 
 <script>
 import appHeader from '@/cmps/app-header.vue'
-import '@/styles/styles.scss'
 
 export default {
   components: {
