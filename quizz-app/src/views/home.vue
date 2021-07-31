@@ -4,15 +4,13 @@
     <router-link to="/login">Login</router-link>
     <router-link to="/admin">Admin Page</router-link>
     <div class="quiz"></div>
-    <div class="title">
-      Title{{quiz.title}}
-    </div>
+    <div class="title">Title{{ quiz.title }}</div>
     <div class="qusts">
       <div class="qust" v-for="qust in quiz.qusts" :key="qust.id">
-        {{qust.qust}}?
+        {{ qust.qust }}?
         <div class="opts">
           <div class="opt" v-for="opt in qust.opts" :key="opt.id">
-            {{opt.txt}}
+            {{ opt.txt }}
           </div>
         </div>
       </div>
@@ -21,8 +19,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
 export default {
   name: "Home",
   data() {
@@ -83,6 +79,16 @@ export default {
         ],
       },
     };
+  },
+  computed: {
+    quizzes(){
+      return this.$store.getters.quizzesForShow
+    }
+  },
+  created() {
+    this.$store.dispatch({
+      type: "loadQuizzes",
+    });
   },
   components: {},
 };
