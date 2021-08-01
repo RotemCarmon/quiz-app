@@ -1,0 +1,43 @@
+.quiz-edit-item-container{
+    border: 1px solid gray;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    width: 45vw;
+    margin: 0 auto;
+    padding: 20px;
+    input{
+        border:none;
+        border-bottom: 1px solid gainsboro;
+        transition: all .3s;
+        outline: none;
+        padding: 15px;
+    }
+    input:focus{
+        // border-bottom: 2px solid rgb(179, 4, 179);
+        border-bottom: 3px solid #673ab7;
+        background-color: #f8f9fa;
+    }
+}
+.title-container{
+    .title{
+        height: 4rem;
+        font-size: 2.5rem;
+        margin-bottom: 5px;
+    }
+    .description{
+        height: 2rem;
+    }
+}
+.question-container{
+    .question{
+        // height: 1rem;
+        // font-size: 2.5rem;
+        margin-bottom: 10px;
+        
+    }
+    .option{
+        margin-bottom: 10px;
+
+    }
+}

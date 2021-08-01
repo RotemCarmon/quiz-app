@@ -84,7 +84,7 @@ async function remove(quizId) {
 
 
 async function save(quiz) {
-    if (!quiz._id) {
+    if (quiz._id) {
         return storageService.put(QUIZ_DB, quiz)
         // return httpService.post(QUIZ_URL, quiz)
     } else {
