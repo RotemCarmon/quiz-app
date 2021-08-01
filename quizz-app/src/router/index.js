@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import home from '../views/home.vue'
+import quiz from '../views/quiz.vue'
+// import home from '../views/home.vue'
 import login from '../views/login.vue'
 import admin from '../views/admin.vue'
 import quizEdit from '../cmps/quiz-edit.vue'
@@ -12,8 +13,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: home
+    name: 'Quiz',
+    component: quiz
   },
   {
     path: '/login',
