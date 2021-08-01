@@ -8,7 +8,6 @@ const gQuizzes = [
     {
         _id: 't101',
         title: 'Quiz title',
-        sections: ['js', 'vue', 'react'],
         qusts: [
             {
                 id: 'q101',
@@ -22,7 +21,7 @@ const gQuizzes = [
                 ],
             }, {
                 id: 'q102',
-                section: 'vue',
+                section: 'react',
                 qust: 'Question 2',
                 opts: [
                     { id: 'b101', txt: 'Option 1', imgUrl: 'http:// fhdjsks.com'},
@@ -66,8 +65,12 @@ export const quizService = {
 
 async function query() {
     let quizzes = await storageService.query(QUIZ_DB)
-    if (!quizzes || quizzes.length) quizzes = gQuizzes
-    return gQuizzes
+    if (!quizzes || !quizzes.length) {
+        quizzes = gQuizzes
+        _saveToStorage(gQuizzes)
+    }
+    console.log(quizzes, 'quizzes');
+    return quizzes
     // return httpService.get(QUIZ_URL, isMinimized)
     
 }
@@ -96,4 +99,8 @@ async function save(quiz) {
 function getEmptyQuiz() {
     return {
     }
+}
+
+function _saveToStorage(quizzes){
+    localStorage.setItem(QUIZ_DB, JSON.stringify(quizzes))
 }

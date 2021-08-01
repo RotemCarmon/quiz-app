@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import quiz from '../views/quiz.vue'
-// import home from '../views/home.vue'
+import home from '../views/home.vue'
 import login from '../views/login.vue'
 import admin from '../views/admin.vue'
 import quizEdit from '../cmps/quiz-edit.vue'
+import quizlist from '../cmps/quiz-list.vue'
 import submissions from '../cmps/submissions.vue'
 import templates from '../cmps/templates.vue'
 
@@ -13,6 +14,11 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    name: 'Home',
+    component: home
+  },
+  {
+    path: '/quiz/:quizId',
     name: 'Quiz',
     component: quiz
   },
@@ -27,17 +33,22 @@ const routes = [
     component: admin,
     children:[
       {
-        path:'/quiz/edit',
+        path:'quiz/edit',
         name:'Quiz Edit',
-        component:quizEdit
+        component: quizEdit
       },
       {
-        path:'/submissions',
+        path:'quiz/list',
+        name:'Quiz List',
+        component: quizlist
+      },
+      {
+        path:'submissions',
         name:'Submissions',
         component:submissions
       },
       {
-        path:'/templates',
+        path:'templates',
         name:'Templates',
         component:templates
       }
