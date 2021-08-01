@@ -1,28 +1,33 @@
-import {quizService} from '../services/quiz.service.js'
+import { quizService } from '../services/quiz.service.js'
 
 export const quizStore = {
     state: {
         quizzes: []
     },
     getters: {
-        quizzesForShow(state){
+        quizzesForShow(state) {
             return state.quizzes
         }
     },
     mutations: {
-     setQuizzes(state, {foundQuizzes}){
-         state.quizzes = foundQuizzes
-     }
+        setQuizzes(state, { foundQuizzes }) {
+            state.quizzes = foundQuizzes
+        }
     },
     actions: {
         async loadQuizzes({ commit }) {
             try {
                 const foundQuizzes = await quizService.query();
-                commit({ type: 'setQuizzes', foundQuizzes  })
+                commit({ type: 'setQuizzes', foundQuizzes })
             } catch (err) {
                 console.log('Error loading boards');
                 throw err.message
             }
+        },
+        async saveQuiz(context, { quiz }) {
+            console.log('quiz:', quiz)
+            const savedQuiz=await quizService.save(quiz)
+            console.log('savedQuiz:', savedQuiz)
         },
         async loadQuiz(context, {quizId}) {
             try {
