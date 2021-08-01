@@ -7,10 +7,18 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
 export default {
   name: "Home",
+  computed: {
+    quizzes(){
+      return this.$store.getters.quizzesForShow
+    }
+  },
+  created() {
+    this.$store.dispatch({
+      type: "loadQuizzes",
+    });
+  },
   components: {},
 };
 </script>
