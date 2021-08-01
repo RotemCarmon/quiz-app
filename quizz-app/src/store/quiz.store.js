@@ -28,6 +28,17 @@ export const quizStore = {
             console.log('quiz:', quiz)
             const savedQuiz=await quizService.save(quiz)
             console.log('savedQuiz:', savedQuiz)
-        }
+        },
+        async loadQuiz(context, {quizId}) {
+            try {
+                console.log(quizId);
+                const foundQuiz = await quizService.getById(quizId);
+                console.log(foundQuiz, 'loadquiz');
+                return foundQuiz
+            } catch (err) {
+                console.log('Error loading boards');
+                throw err.message
+            }
+        },
     }
 }

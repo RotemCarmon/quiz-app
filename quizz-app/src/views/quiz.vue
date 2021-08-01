@@ -1,87 +1,37 @@
 <template>
-  <div class="quiz" v-if="quiz">
-    <div class="title">Title{{ quiz.title }}</div>
-    <div class="qusts">
-      <div class="qust" v-for="qust in quiz.qusts" :key="qust.id">
-        {{ qust.qust }}?
-        <div class="opts">
-          <div class="opt" v-for="opt in qust.opts" :key="opt.id">
-            {{ opt.txt }}
-          </div>
+  <section class="qui-container" v-if="quiz">
+    <div class="quiz">
+      <div class="title">{{quiz.title}}</div>
+      <article class="quiz-section" v-for="(section,idx) in sections" :key="idx">
+        <div class="quiz-section-title">{{section}}</div>
+        <div class="quiz-question" v-for="quest in questsBySection(section)" :key="quest.id">
+         {{quest.qust}}
         </div>
-      </div>
+      </article>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      quiz: {
-        _id: "t101",
-        title: "Quiz title",
-        sections: ["js", "vue", "react"],
-        qusts: [
-          {
-            id: "q101",
-            section: "vue",
-            qust: "Question 1",
-            opts: [
-              {
-                id: "o101",
-                txt: "Option 1",
-                imgUrl: "http:// fhdjsks.com",
-                isCorrect: true,
-              },
-              { id: "o102", txt: "Option 2", imgUrl: "http:// fhdjsks.com" },
-              { id: "o103", txt: "Option 3", imgUrl: "http:// fhdjsks.com" },
-              { id: "o104", txt: "Option 4", imgUrl: "http:// fhdjsks.com" },
-            ],
-          },
-          {
-            id: "q102",
-            section: "vue",
-            qust: "Question 2",
-            opts: [
-              {
-                id: "o101",
-                txt: "Option 1",
-                imgUrl: "http:// fhdjsks.com",
-                isCorrect: true,
-              },
-              { id: "o102", txt: "Option 2", imgUrl: "http:// fhdjsks.com" },
-              { id: "o103", txt: "Option 3", imgUrl: "http:// fhdjsks.com" },
-              { id: "o104", txt: "Option 4", imgUrl: "http:// fhdjsks.com" },
-            ],
-          },
-          {
-            id: "q103",
-            section: "vue",
-            qust: "Question 3",
-            opts: [
-              {
-                id: "o101",
-                txt: "Option 1",
-                imgUrl: "http:// fhdjsks.com",
-                isCorrect: true,
-              },
-              { id: "o102", txt: "Option 2", imgUrl: "http:// fhdjsks.com" },
-              { id: "o103", txt: "Option 3", imgUrl: "http:// fhdjsks.com" },
-              { id: "o104", txt: "Option 4", imgUrl: "http:// fhdjsks.com" },
-            ],
-          },
-        ],
-      },
+      quiz: null
     };
   },
   async created() {
-    // const { quizId } = this.$route.params;
-    // const quiz = await this.$store.dispatch("loadQuiz", quizId);
-    // this.quiz = quiz;
+    const { quizId } = this.$route.params;
+    const quiz = await this.$store.dispatch({type: 'loadQuiz', quizId});
+    this.quiz = quiz;
   },
+  computed: {
+    questsBySection(){
+      return (section) => 
+        this.quiz.qusts.filter(quest => quest.section === section)
+    },
+    sections(){
+      return Array.from(new Set(this.quiz.qusts.map(quest => quest.section)))
+    }
+  }
 };
 </script>
-
-<style>
-</style>
