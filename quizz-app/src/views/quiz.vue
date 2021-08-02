@@ -1,58 +1,63 @@
 <template>
   <section class="qui-container" v-if="quiz">
-    <form class="quiz">
+    <form @submit.prevent="onSubmitQuiz" class="quiz">
       <div class="title">{{quiz.title}}</div>
-      <article class="quiz-section" v-for="(section,idx) in sections" :key="idx">
-        <h2 class="quiz-section-title">{{section}}</h2>
-        <div class="quiz-question" v-for="quest in questsBySection(section)" :key="quest.id">
+      <article class="quiz-section" v-for="section in quiz.sections" :key="section.id">
+        <h2 class="quiz-section-title">{{section.title}}</h2>
+        <h3 v-if="section.desc">{{section.desc}}</h3>
+        <div class="quiz-question" v-for="quest in section.quests" :key="quest.id">
          <h3>{{quest.txt}}</h3>
-         <ul>
+         <ul >
            <li v-for="opt in quest.opts" :key="opt.id">
-             <label><input type="radio" :value="opt.id" v-model="quizAns[quest.id].chosenAnsId" />{{opt.txt}}</label>
+             <label><input type="radio" :value="opt.id" v-model="quizSubmission[quest.id]" />{{opt.txt}}</label>
            </li>
          </ul>
         </div>
       </article>
+      <button>Good Luck!</button>
     </form>
   </section>
 </template>
 
 <script>
+import {quizService} from '../services/quiz.service'
 export default {
   data() {
     return {
       quiz: null,
-      quizAns: []
+      quizSubmission: null
     };
   },
   methods: {
-    getEmptyQuizAns(quiz){
-      const quizAns = quiz.quests.reduce((acc, quest) => {
-        const correctAns = quest.opts.find(opt => opt.isCorrect)
-        acc[quest.id] = {correctOptId: correctAns.id, questId: quest.id, chosenAnsId: null}
+    getEmptyQuizSub(quiz){
+      const quizSubmission = quiz.sections.reduce((acc, section) => {
+        section.quests.forEach(quest => {
+          acc[quest.id] = null
+        })
         return acc
       }, {})
-      return quizAns
+      return quizSubmission
     },
-    // TODO: 
-    // onSubmitQuiz(){
-    //   quizService.submitQuiz(this.quiz, emptyQuizAns)
-    // }
+    onSubmitQuiz(){
+      quizService.submitQuiz(this.quiz, this.quizSubmission, this.sectionQuestsMap)
+    }
   },
   computed: {
-    questsBySection(){
-      return (section) => 
-        this.quiz.quests.filter(quest => quest.section === section)
-    },
-    sections(){
-      return Array.from(new Set(this.quiz.quests.map(quest => quest.section)))
+    sectionQuestsMap(){
+      return this.quiz.sections.reduce((acc,section) => {
+        if(!acc[section.title]) acc[section.title] = []
+        section.quests.forEach(quest => {
+          acc[section.title].push(quest.id)
+        })
+        return acc
+      },{})
     }
   },
   watch: {
-    quizAns:{
+    quizSubmission:{
       deep: true,
       handler(){
-        console.log(this.quizAns, 'from watch')
+        console.log(this.quizSubmission, 'from watch')
       }
     }
   },
@@ -60,8 +65,8 @@ export default {
     const { quizId } = this.$route.params;
     const quiz = await this.$store.dispatch({type: 'loadQuiz', quizId});
     this.quiz = quiz;
-    this.quizAns = this.getEmptyQuizAns(quiz)
-    console.log(this.emptyQuizAns);
+    this.quizSubmission = this.getEmptyQuizSub(quiz)
+    console.log(this.sectionQuestsMap, 'lolo');
   },
 };
 </script>
