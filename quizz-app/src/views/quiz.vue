@@ -1,18 +1,7 @@
 <template>
   <section class="qui-container" v-if="quiz">
-    <form class="quiz">
+    <form @submit.prevent="onSubmitQuiz" class="quiz">
       <div class="title">{{quiz.title}}</div>
-      <!-- <article class="quiz-section" v-for="(section,idx) in sections" :key="idx">
-        <h2 class="quiz-section-title">{{section}}</h2>
-        <div class="quiz-question" v-for="quest in questsBySection(section)" :key="quest.id">
-         <h3>{{quest.txt}}</h3>
-         <ul>
-           <li v-for="opt in quest.opts" :key="opt.id">
-             <label><input type="radio" :value="opt.id" v-model="quizAns[quest.id]" />{{opt.txt}}</label>
-           </li>
-         </ul>
-        </div>
-      </article> -->
       <article class="quiz-section" v-for="section in quiz.sections" :key="section.id">
         <h2 class="quiz-section-title">{{section.title}}</h2>
         <h3 v-if="section.desc">{{section.desc}}</h3>
@@ -25,11 +14,13 @@
          </ul>
         </div>
       </article>
+      <button>Good Luck!</button>
     </form>
   </section>
 </template>
 
 <script>
+import {quizService} from '../services/quiz.service'
 export default {
   data() {
     return {
@@ -47,13 +38,20 @@ export default {
       }, {})
       return quizSubmission
     },
-    // TODO: 
-    // onSubmitQuiz(){
-    //   quizService.submitQuiz(this.quiz, emptyQuizAns)
-    // }
+    onSubmitQuiz(){
+      quizService.submitQuiz(this.quiz, this.quizSubmission, this.sectionQuestsMap)
+    }
   },
   computed: {
-
+    sectionQuestsMap(){
+      return this.quiz.sections.reduce((acc,section) => {
+        if(!acc[section.title]) acc[section.title] = []
+        section.quests.forEach(quest => {
+          acc[section.title].push(quest.id)
+        })
+        return acc
+      },{})
+    }
   },
   watch: {
     quizSubmission:{
@@ -68,6 +66,7 @@ export default {
     const quiz = await this.$store.dispatch({type: 'loadQuiz', quizId});
     this.quiz = quiz;
     this.quizSubmission = this.getEmptyQuizSub(quiz)
+    console.log(this.sectionQuestsMap, 'lolo');
   },
 };
 </script>

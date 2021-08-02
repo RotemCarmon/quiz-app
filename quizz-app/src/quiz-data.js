@@ -94,7 +94,7 @@ export default [
                 ]
             }
         ],
-        quizEvalMap: {
+        questAnsMap: {
             q101: 'a101',
             q102: 'b104',
             q103: 'c103',

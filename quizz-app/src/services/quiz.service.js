@@ -13,7 +13,8 @@ export const quizService = {
     save,
     getEmptyQuiz,
     getEmptySection,
-    getEmptyQuest
+    getEmptyQuest,
+    submitQuiz
 }
 
 async function query() {
@@ -47,6 +48,27 @@ async function save(quiz) {
         return storageService.post(QUIZ_DB, quiz)
         // return httpService.put(QUIZ_URL + quiz._id, quiz)
     }
+}
+
+// WILL BE IN BACKEND
+function submitQuiz(quiz, submission, sectionsQuestsMap){
+    const questIds = Object.keys(submission)
+    const questAnsMap = quiz.questAnsMap
+    const sectionsTitles = Object.keys(sectionsQuestsMap)
+    const evalAcc = {}
+    sectionsTitles.forEach(title => evalAcc[title] = {success: 0, fail: 0})
+    const evalMap = questIds.reduce((acc, questId) => {
+        let currSection = ''
+        sectionsTitles.forEach(section => {
+            if(sectionsQuestsMap[section].includes(questId)) 
+                currSection = section
+        })  
+        if(submission[questId] === questAnsMap[questId]) {
+            acc[currSection].success++
+        } else acc[currSection].fail++
+        return acc
+    }, evalAcc)
+    return evalMap
 }
 
 function getEmptyQuiz() {
