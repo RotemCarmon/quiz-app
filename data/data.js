@@ -4,11 +4,11 @@ const quiz = {
   _id: 't101',
   title: 'Quiz title',
   sections: ['js', 'vue', 'react'],
-  qusts: [
+  quests: [
     {
       id: 'q101',
       section:'vue',
-      qust: 'Question 1',
+      quest: 'Question 1',
       opts: [
         { id: 'o101', txt: 'Option 1' , imgUrl: 'http:// fhdjsks.com', isCorrect: true},
         { id: 'o102', txt: 'Option 2' , imgUrl: 'http:// fhdjsks.com'},
@@ -37,10 +37,10 @@ const quiz = {
 //       id: 's101',
 //       title: 'Vue',
 //       desc: 'Im a vue section',
-//       qusts: [
+//       quests: [
 //         {
 //           id: 'q101',
-//           qust: 'Question 1',
+//           quest: 'Question 1',
 //           opts: [
 //             { id: 'o101', txt: 'Option 1' , imgUrl: 'http:// fhdjsks.com', isCorrect: true},
 //             { id: 'o102', txt: 'Option 2' , imgUrl: ''}

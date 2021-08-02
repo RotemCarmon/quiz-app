@@ -1,18 +1,18 @@
 import { storageService } from './async-storage.service'
 // import { httpService } from './http.service'
 
-const QUIZ_DB = 'quiz'
+const QUIZ_DB = 'quizDB'
 // const QUIZ_URL = 'quiz/'
 
-const gQuizzes = [
+const gQuizs = [
     {
         _id: 't101',
         title: 'Quiz title',
-        qusts: [
+        quests: [
             {
                 id: 'q101',
                 section: 'vue',
-                qust: 'Question 1',
+                txt: 'Question 1',
                 opts: [
                     { id: 'a101', txt: 'Option 1', imgUrl: 'http:// fhdjsks.com', isCorrect: true },
                     { id: 'a102', txt: 'Option 2', imgUrl: 'http:// fhdjsks.com' },
@@ -22,7 +22,7 @@ const gQuizzes = [
             }, {
                 id: 'q102',
                 section: 'react',
-                qust: 'Question 2',
+                txt: 'Question 2',
                 opts: [
                     { id: 'b101', txt: 'Option 1', imgUrl: 'http:// fhdjsks.com'},
                     { id: 'b102', txt: 'Option 2', imgUrl: 'http:// fhdjsks.com', isCorrect: true}, 
@@ -32,7 +32,7 @@ const gQuizzes = [
             }, {
                 id: 'q103',
                 section: 'vue',
-                qust: 'Question 3',
+                txt: 'Question 3',
                 opts: [
                     { id: 'c101', txt: 'Option 1', imgUrl: 'http:// fhdjsks.com' },
                     { id: 'c102', txt: 'Option 2', imgUrl: 'http:// fhdjsks.com' },
@@ -42,7 +42,7 @@ const gQuizzes = [
             }, {
                 id: 'q104',
                 section: 'vue',
-                qust: 'Question 4',
+                txt: 'Question 4',
                 opts: [
                     { id: 'd101', txt: 'Option 1', imgUrl: 'http:// fhdjsks.com', isCorrect: true },
                     { id: 'd102', txt: 'Option 2', imgUrl: 'http:// fhdjsks.com' },
@@ -64,13 +64,13 @@ export const quizService = {
 }
 
 async function query() {
-    let quizzes = await storageService.query(QUIZ_DB)
-    if (!quizzes || !quizzes.length) {
-        quizzes = gQuizzes
-        _saveToStorage(gQuizzes)
+    let quizs = await storageService.query(QUIZ_DB)
+    if (!quizs || !quizs.length) {
+        quizs = gQuizs
+        _saveToStorage(gQuizs)
     }
-    console.log(quizzes, 'quizzes');
-    return quizzes
+    console.log(quizs, 'quizs');
+    return quizs
     // return httpService.get(QUIZ_URL, isMinimized)
     
 }
@@ -101,6 +101,6 @@ function getEmptyQuiz() {
     }
 }
 
-function _saveToStorage(quizzes){
-    localStorage.setItem(QUIZ_DB, JSON.stringify(quizzes))
+function _saveToStorage(quizs){
+    localStorage.setItem(QUIZ_DB, JSON.stringify(quizs))
 }
