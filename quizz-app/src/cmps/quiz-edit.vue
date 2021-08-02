@@ -1,6 +1,13 @@
 <template>
   <div class="quiz edit">
-    <h1>New Quiz</h1>
+    <!-- <h1>New Quiz</h1> -->
+    <input
+      v-model="quizToEdit.title"
+      class="quiz-title"
+      type="text"
+      placeholder="Quiz title"
+      @keypress="this.style.width = (this.value.length + 1) * 8 + 'px'"
+    />
     <form @submit="saveQuiz">
       <!-- ****************************************************************************** -->
       <!-- <div class="quiz-edit-item-container title-container">
@@ -18,78 +25,98 @@
         />
       </div>
       <div
-        v-for="(qust, qustIdx) in quizToEdit.qusts"
-        :key="qust.id"
+        v-for="(quest, questIdx) in quizToEdit.quests"
+        :key="quest.id"
         class="quiz-edit-item-container question-container"
       >
         <input
           class="question"
           type="text"
           placeholder="Question"
-          v-model="quizToEdit.qusts[qustIdx].qust"
+          v-model="quizToEdit.quests[questIdx].quest"
         />
         <input
-          v-for="(opt, optIdx) in qust.opts"
+          v-for="(opt, optIdx) in quest.opts"
           :key="optIdx"
           class="option"
           type="text"
           :placeholder="'Option ' + (optIdx + 1)"
-          v-model="quizToEdit.qusts[qustIdx].opts[optIdx].txt"
+          v-model="quizToEdit.quests[questIdx].opts[optIdx].txt"
         />
         <input
           class="option"
           type="text"
           placeholder="Add option"
-          @click="addOpt(qustIdx)"
+          @click="addOpt(questIdx)"
         />
       </div> -->
       <!-- ****************************************************************************** -->
-      <div class="section" v-for="(section, idx) in quizToEdit.sections" :key="idx">
+      <div
+        class="section"
+        v-for="(section, sectionIdx) in quizToEdit.sections"
+        :key="section.id"
+      >
+        <button type="button" @click="addquest(sectionIdx)">
+          Add Question
+        </button>
         <div class="quiz-edit-item-container title-container">
           <input
-            v-model="quizToEdit.sections[idx].txt"
+            v-model="quizToEdit.sections[sectionIdx].title"
             class="title"
             type="text"
             placeholder="Section title"
           />
           <input
-            v-model="quizToEdit.sections[idx].desc"
+            v-model="quizToEdit.sections[sectionIdx].desc"
             class="description"
             type="text"
             placeholder="Section description"
           />
         </div>
         <div
-          v-for="(qust, qustIdx) in getSectionQust(section)"
-          :key="qust.id"
+          v-for="(quest, questIdx) in section.quests"
+          :key="quest.id"
           class="quiz-edit-item-container question-container"
         >
           <input
             class="question"
             type="text"
             placeholder="Question"
-            v-model="quizToEdit.qusts[qustIdx].qust"
+            v-model="quizToEdit.sections[sectionIdx].quests[questIdx].quest"
           />
-          <input
-            v-for="(opt, optIdx) in qust.opts"
-            :key="optIdx"
-            class="option"
-            type="text"
-            :placeholder="'Option ' + (optIdx + 1)"
-            v-model="quizToEdit.qusts[qustIdx].opts[optIdx].txt"
-          />
+          <div
+            class="options"
+            v-for="(opt, optIdx) in quest.opts"
+            :key="opt.id"
+          >
+            <input
+              type="radio"
+              :ref="opt.id"
+              :checked="isCorrectOpt(quest.id, opt.id)"
+              @input="setCorrectOpt(quest.id, opt.id)"
+            />
+            <input
+              class="option"
+              type="text"
+              :placeholder="'Option ' + (optIdx + 1)"
+              v-model="
+                quizToEdit.sections[sectionIdx].quests[questIdx].opts[optIdx]
+                  .txt
+              "
+            />
+          </div>
+          <!-- <input type="radio"> -->
           <input
             class="option"
             type="text"
             placeholder="Add option"
-            @click="addOpt(qustIdx)"
+            @click="addOpt(sectionIdx, questIdx)"
           />
         </div>
       </div>
       <!-- ****************************************************************************** -->
       <button type="submit">Save Quiz</button>
     </form>
-    <button @click="addQust">Add Question</button>
     <button @click="addSection">Add Section</button>
 
     <pre>
@@ -99,33 +126,48 @@
 </template>
 
 <script>
-import {quizService} from '../services/quiz.service.js'
+import { quizService } from "../services/quiz.service.js";
 export default {
   data() {
     return {
-      quizToEdit: quizService.getEmptyQuiz()
+      quizToEdit: quizService.getEmptyQuiz(),
     };
+  },
+  computed: {
+    isCorrectOpt() {
+      return (questId, optId) => {
+        return this.quizToEdit.quizEvalMap[questId] === optId;
+      };
+    },
   },
   methods: {
     saveQuiz() {
       this.$store.dispatch({ type: "saveQuiz", quiz: this.quizToEdit });
     },
-    addQust() {
-      this.quizToEdit.qusts.push({
-        qust: "",
-        opts: [{ txt: "Option 1" }],
-      });
+    addquest(sectionIdx) {
+      this.quizToEdit.sections[sectionIdx].quests.push(
+        quizService.getEmptyQuest()
+      );
     },
-    addOpt(qustIdx) {
-      var txt = "Option " + (this.quizToEdit.qusts[qustIdx].opts.length + 1);
-      this.quizToEdit.qusts[qustIdx].opts.push({ txt });
+    addOpt(sectionIdx, questIdx) {
+      // var txt =
+      //   "Option " +
+      //   (this.quizToEdit.sections[sectionIdx].quests[questIdx].opts.length + 1);
+      this.quizToEdit.sections[sectionIdx].quests[questIdx].opts.push(
+        quizService.getEmptyOpt()
+      );
     },
     addSection() {
-      this.quizToEdit.sections.push({ txt: "Untitled section", desc: "Description" });
+      this.quizToEdit.sections.push(quizService.getEmptySection());
     },
-    getSectionQust(section){
-      console.log('section:', section)
-    }
+    getSectionquest(section) {
+      console.log("section:", section);
+    },
+    setCorrectOpt(questId, optId) {
+      this.quizToEdit.quizEvalMap[questId] = optId;
+      console.log('this.quizToEdit.quizEvalMap:', this.quizToEdit.quizEvalMap)
+      this.$forceUpdate();
+    },
   },
 };
 </script>

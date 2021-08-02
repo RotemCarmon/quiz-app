@@ -62,7 +62,8 @@ export const quizService = {
     save,
     getEmptyQuiz,
     getEmptySection,
-    getEmptyQuest
+    getEmptyQuest,
+    getEmptyOpt
 }
 
 async function query() {
@@ -120,9 +121,14 @@ function getEmptyQuest() {
     return {
         id: _makeId(),
         quest: 'Question',
-        opts: [
-            { id: _makeId(), txt: 'Option 1', imgUrl: '' },
-        ],
+        opts: [getEmptyOpt()],
+    }
+}
+function getEmptyOpt() {
+    return {
+        id: _makeId(),
+        txt: 'Option',
+        imgUrl: ''
     }
 }
 

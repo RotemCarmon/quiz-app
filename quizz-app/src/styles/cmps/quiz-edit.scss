@@ -1,4 +1,21 @@
-.quiz-edit-item-container{
+.quiz.edit {
+    input {
+        border: none;
+        border-bottom: 3px solid gainsboro;
+        transition: all 0.3s;
+        outline: none;
+        padding: 15px;
+    }
+    input:focus {
+        // border-bottom: 2px solid rgb(179, 4, 179);
+        border-color:#673ab7;
+        background-color: #f8f9fa;
+    }
+    input.quiz-title,input.option{
+        padding: 5px;
+    }
+}
+.quiz-edit-item-container {
     border: 1px solid gray;
     display: flex;
     flex-direction: column;
@@ -7,38 +24,24 @@
     margin: 0 auto;
     padding: 20px;
     margin-bottom: 15px;
-    input{
-        border:none;
-        border-bottom: 1px solid gainsboro;
-        transition: all .3s;
-        outline: none;
-        padding: 15px;
-    }
-    input:focus{
-        // border-bottom: 2px solid rgb(179, 4, 179);
-        border-bottom: 3px solid #673ab7;
-        background-color: #f8f9fa;
-    }
 }
-.title-container{
-    .title{
+.title-container {
+    .title {
         height: 4rem;
         font-size: 2.5rem;
         margin-bottom: 5px;
     }
-    .description{
+    .description {
         height: 2rem;
     }
 }
-.question-container{
-    .question{
+.question-container {
+    .question {
         // height: 1rem;
         // font-size: 2.5rem;
         margin-bottom: 10px;
-        
     }
-    .option{
+    .option {
         margin-bottom: 10px;
-
     }
 }
