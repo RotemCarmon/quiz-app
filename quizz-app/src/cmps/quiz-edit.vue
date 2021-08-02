@@ -2,6 +2,7 @@
   <div class="quiz edit">
     <h1>New Quiz</h1>
     <form @submit="saveQuiz">
+      <!-- ****************************************************************************** -->
       <div class="quiz-edit-item-container title-container">
         <input
           v-model="quizToEdit.title"
@@ -16,7 +17,6 @@
           placeholder="Quiz description"
         />
       </div>
-      <button @click.prevent="addQust">Add Question</button>
       <div
         v-for="(qust, qustIdx) in quizToEdit.qusts"
         :key="qust.id"
@@ -43,8 +43,55 @@
           @click="addOpt(qustIdx)"
         />
       </div>
+      <!-- ****************************************************************************** -->
+      <div class="section" v-for="(section, idx) in quizToEdit.sections" :key="idx">
+        <div class="quiz-edit-item-container title-container">
+          <input
+            v-model="quizToEdit.sections[idx].txt"
+            class="title"
+            type="text"
+            placeholder="Section title"
+          />
+          <input
+            v-model="quizToEdit.sections[idx].desc"
+            class="description"
+            type="text"
+            placeholder="Section description"
+          />
+        </div>
+        <div
+          v-for="(qust, qustIdx) in getSectionQust(section)"
+          :key="qust.id"
+          class="quiz-edit-item-container question-container"
+        >
+          <input
+            class="question"
+            type="text"
+            placeholder="Question"
+            v-model="quizToEdit.qusts[qustIdx].qust"
+          />
+          <input
+            v-for="(opt, optIdx) in qust.opts"
+            :key="optIdx"
+            class="option"
+            type="text"
+            :placeholder="'Option ' + (optIdx + 1)"
+            v-model="quizToEdit.qusts[qustIdx].opts[optIdx].txt"
+          />
+          <input
+            class="option"
+            type="text"
+            placeholder="Add option"
+            @click="addOpt(qustIdx)"
+          />
+        </div>
+      </div>
+      <!-- ****************************************************************************** -->
       <button type="submit">Save Quiz</button>
     </form>
+    <button @click="addQust">Add Question</button>
+    <button @click="addSection">Add Section</button>
+
     <pre>
       {{ quizToEdit }}
     </pre>
@@ -60,9 +107,9 @@ export default {
         opts: [{ txt: "" }],
       },
       quizToEdit: {
-        title: "",
+        title: "Untitled form",
         desc: "",
-        sections: ["js", "vue", "react"],
+        sections: [],
         qusts: [],
       },
     };
@@ -81,6 +128,12 @@ export default {
       var txt = "Option " + (this.quizToEdit.qusts[qustIdx].opts.length + 1);
       this.quizToEdit.qusts[qustIdx].opts.push({ txt });
     },
+    addSection() {
+      this.quizToEdit.sections.push({ txt: "Untitled section", desc: "Description" });
+    },
+    getSectionQust(section){
+      console.log('section:', section)
+    }
   },
 };
 </script>

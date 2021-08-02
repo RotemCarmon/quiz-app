@@ -45,7 +45,6 @@ const quiz = {
 //             { id: 'o101', txt: 'Option 1' , imgUrl: 'http:// fhdjsks.com', isCorrect: true},
 //             { id: 'o102', txt: 'Option 2' , imgUrl: ''}
 //           ],
-
 //         }
 //       ]
 //     }
