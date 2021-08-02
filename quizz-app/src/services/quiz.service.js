@@ -59,15 +59,19 @@ function submitQuiz(quiz, submission, sectionsQuestsMap){
     sectionsTitles.forEach(title => evalAcc[title] = {success: 0, fail: 0})
     const evalMap = questIds.reduce((acc, questId) => {
         let currSection = ''
-        sectionsTitles.forEach(section => {
-            if(sectionsQuestsMap[section].includes(questId)) 
+        for (let i = 0; i < sectionsTitles.length; i++) {
+            var section = sectionsTitles[i]
+            if (sectionsQuestsMap[section].includes(questId)) {
                 currSection = section
-        })  
+                break;
+            }
+        }
         if(submission[questId] === questAnsMap[questId]) {
             acc[currSection].success++
         } else acc[currSection].fail++
         return acc
     }, evalAcc)
+    console.log(evalMap)
     return evalMap
 }
 
