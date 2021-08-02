@@ -82,7 +82,7 @@ function getEmptyQuiz() {
         desc: '',
         createdAt: null,
         sections: [getEmptySection()],
-        quizEvalMap: {}
+        questAnsMap: {}
     }
 }
 function getEmptySection() {
@@ -97,7 +97,7 @@ function getEmptySection() {
 function getEmptyQuest() {
     return {
         id: _makeId(),
-        quest: 'Question',
+        txt: 'Question',
         opts: [getEmptyOpt()],
     }
 }

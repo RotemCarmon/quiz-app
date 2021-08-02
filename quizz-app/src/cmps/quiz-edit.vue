@@ -1,14 +1,12 @@
 <template>
   <div class="quiz edit">
-    <!-- <h1>New Quiz</h1> -->
     <input
       v-model="quizToEdit.title"
       class="quiz-title"
       type="text"
       placeholder="Quiz title"
-      @keypress="this.style.width = (this.value.length + 1) * 8 + 'px'"
     />
-    <form @submit="saveQuiz">
+    <form @submit.prevent="saveQuiz">
       <!-- ****************************************************************************** -->
       <!-- <div class="quiz-edit-item-container title-container">
         <input
@@ -82,7 +80,7 @@
             class="question"
             type="text"
             placeholder="Question"
-            v-model="quizToEdit.sections[sectionIdx].quests[questIdx].quest"
+            v-model="quizToEdit.sections[sectionIdx].quests[questIdx].txt"
           />
           <div
             class="options"
@@ -105,7 +103,6 @@
               "
             />
           </div>
-          <!-- <input type="radio"> -->
           <input
             class="option"
             type="text"
@@ -136,7 +133,7 @@ export default {
   computed: {
     isCorrectOpt() {
       return (questId, optId) => {
-        return this.quizToEdit.quizEvalMap[questId] === optId;
+        return this.quizToEdit.questAnsMap[questId] === optId;
       };
     },
   },
@@ -160,12 +157,8 @@ export default {
     addSection() {
       this.quizToEdit.sections.push(quizService.getEmptySection());
     },
-    getSectionquest(section) {
-      console.log("section:", section);
-    },
     setCorrectOpt(questId, optId) {
-      this.quizToEdit.quizEvalMap[questId] = optId;
-      console.log('this.quizToEdit.quizEvalMap:', this.quizToEdit.quizEvalMap)
+      this.quizToEdit.questAnsMap[questId] = optId;
       this.$forceUpdate();
     },
   },
