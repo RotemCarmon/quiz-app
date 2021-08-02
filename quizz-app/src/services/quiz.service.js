@@ -17,7 +17,6 @@ export const quizService = {
 }
 
 async function query() {
-    console.log(gQuizs,'from query');
     let quizs = await storageService.query(QUIZ_DB)
     if (!quizs || !quizs.length) {
         quizs = gQuizs
