@@ -1,59 +1,10 @@
 import { storageService } from './async-storage.service'
 // import { httpService } from './http.service'
 
+import gQuizs from '../quiz-data.js'
+
 const QUIZ_DB = 'quizDB'
 // const QUIZ_URL = 'quiz/'
-
-const gQuizs = [
-    {
-        _id: 't101',
-        title: 'Quiz title',
-        quests: [
-            {
-                id: 'q101',
-                section: 'vue',
-                txt: 'Question 1',
-                opts: [
-                    { id: 'a101', txt: 'Option 1', imgUrl: 'http:// fhdjsks.com', isCorrect: true },
-                    { id: 'a102', txt: 'Option 2', imgUrl: 'http:// fhdjsks.com' },
-                    { id: 'a103', txt: 'Option 3', imgUrl: 'http:// fhdjsks.com' },
-                    { id: 'a104', txt: 'Option 4', imgUrl: 'http:// fhdjsks.com' },
-                ],
-            }, {
-                id: 'q102',
-                section: 'react',
-                txt: 'Question 2',
-                opts: [
-                    { id: 'b101', txt: 'Option 1', imgUrl: 'http:// fhdjsks.com' },
-                    { id: 'b102', txt: 'Option 2', imgUrl: 'http:// fhdjsks.com', isCorrect: true },
-                    { id: 'b103', txt: 'Option 3', imgUrl: 'http:// fhdjsks.com' },
-                    { id: 'b104', txt: 'Option 4', imgUrl: 'http:// fhdjsks.com' },
-                ],
-            }, {
-                id: 'q103',
-                section: 'vue',
-                txt: 'Question 3',
-                opts: [
-                    { id: 'c101', txt: 'Option 1', imgUrl: 'http:// fhdjsks.com' },
-                    { id: 'c102', txt: 'Option 2', imgUrl: 'http:// fhdjsks.com' },
-                    { id: 'c103', txt: 'Option 3', imgUrl: 'http:// fhdjsks.com', isCorrect: true },
-                    { id: 'c104', txt: 'Option 4', imgUrl: 'http:// fhdjsks.com' },
-                ],
-            }, {
-                id: 'q104',
-                section: 'vue',
-                txt: 'Question 4',
-                opts: [
-                    { id: 'd101', txt: 'Option 1', imgUrl: 'http:// fhdjsks.com', isCorrect: true },
-                    { id: 'd102', txt: 'Option 2', imgUrl: 'http:// fhdjsks.com' },
-                    { id: 'd103', txt: 'Option 3', imgUrl: 'http:// fhdjsks.com' },
-                    { id: 'd104', txt: 'Option 4', imgUrl: 'http:// fhdjsks.com' },
-                ],
-            }
-        ]
-    }
-]
-
 
 export const quizService = {
     query,
@@ -66,6 +17,7 @@ export const quizService = {
 }
 
 async function query() {
+    console.log(gQuizs,'from query');
     let quizs = await storageService.query(QUIZ_DB)
     if (!quizs || !quizs.length) {
         quizs = gQuizs
