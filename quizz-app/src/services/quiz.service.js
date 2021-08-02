@@ -24,8 +24,8 @@ const gQuizs = [
                 section: 'react',
                 txt: 'Question 2',
                 opts: [
-                    { id: 'b101', txt: 'Option 1', imgUrl: 'http:// fhdjsks.com'},
-                    { id: 'b102', txt: 'Option 2', imgUrl: 'http:// fhdjsks.com', isCorrect: true}, 
+                    { id: 'b101', txt: 'Option 1', imgUrl: 'http:// fhdjsks.com' },
+                    { id: 'b102', txt: 'Option 2', imgUrl: 'http:// fhdjsks.com', isCorrect: true },
                     { id: 'b103', txt: 'Option 3', imgUrl: 'http:// fhdjsks.com' },
                     { id: 'b104', txt: 'Option 4', imgUrl: 'http:// fhdjsks.com' },
                 ],
@@ -36,7 +36,7 @@ const gQuizs = [
                 opts: [
                     { id: 'c101', txt: 'Option 1', imgUrl: 'http:// fhdjsks.com' },
                     { id: 'c102', txt: 'Option 2', imgUrl: 'http:// fhdjsks.com' },
-                    { id: 'c103', txt: 'Option 3', imgUrl: 'http:// fhdjsks.com', isCorrect: true},
+                    { id: 'c103', txt: 'Option 3', imgUrl: 'http:// fhdjsks.com', isCorrect: true },
                     { id: 'c104', txt: 'Option 4', imgUrl: 'http:// fhdjsks.com' },
                 ],
             }, {
@@ -60,7 +60,9 @@ export const quizService = {
     getById,
     remove,
     save,
-    getEmptyQuiz
+    getEmptyQuiz,
+    getEmptySection,
+    getEmptyQuest
 }
 
 async function query() {
@@ -72,7 +74,7 @@ async function query() {
     console.log(quizs, 'quizs');
     return quizs
     // return httpService.get(QUIZ_URL, isMinimized)
-    
+
 }
 
 async function getById(quizId) {
@@ -98,9 +100,41 @@ async function save(quiz) {
 
 function getEmptyQuiz() {
     return {
+        title: 'Quiz title',
+        desc: '',
+        createdAt: null,
+        sections: [getEmptySection()],
+        quizEvalMap: {}
+    }
+}
+function getEmptySection() {
+    return {
+        id: _makeId(),
+        title: 'Untitled section',
+        desc: 'Description',
+        quests: []
     }
 }
 
-function _saveToStorage(quizs){
+function getEmptyQuest() {
+    return {
+        id: _makeId(),
+        quest: 'Question',
+        opts: [
+            { id: _makeId(), txt: 'Option 1', imgUrl: '' },
+        ],
+    }
+}
+
+function _makeId(length = 5) {
+    var text = ''
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    for (var i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length))
+    }
+    return text
+}
+
+function _saveToStorage(quizs) {
     localStorage.setItem(QUIZ_DB, JSON.stringify(quizs))
 }

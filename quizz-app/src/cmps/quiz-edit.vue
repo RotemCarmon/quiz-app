@@ -3,7 +3,7 @@
     <h1>New Quiz</h1>
     <form @submit="saveQuiz">
       <!-- ****************************************************************************** -->
-      <div class="quiz-edit-item-container title-container">
+      <!-- <div class="quiz-edit-item-container title-container">
         <input
           v-model="quizToEdit.title"
           class="title"
@@ -42,7 +42,7 @@
           placeholder="Add option"
           @click="addOpt(qustIdx)"
         />
-      </div>
+      </div> -->
       <!-- ****************************************************************************** -->
       <div class="section" v-for="(section, idx) in quizToEdit.sections" :key="idx">
         <div class="quiz-edit-item-container title-container">
@@ -99,19 +99,11 @@
 </template>
 
 <script>
+import {quizService} from '../services/quiz.service.js'
 export default {
   data() {
     return {
-      qustToEdit: {
-        qust: "",
-        opts: [{ txt: "" }],
-      },
-      quizToEdit: {
-        title: "Untitled form",
-        desc: "",
-        sections: [],
-        qusts: [],
-      },
+      quizToEdit: quizService.getEmptyQuiz()
     };
   },
   methods: {

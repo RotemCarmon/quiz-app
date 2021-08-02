@@ -7,13 +7,13 @@ const quiz = {
   quests: [
     {
       id: 'q101',
-      section:'vue',
+      section: 'vue',
       quest: 'Question 1',
       opts: [
-        { id: 'o101', txt: 'Option 1' , imgUrl: 'http:// fhdjsks.com', isCorrect: true},
-        { id: 'o102', txt: 'Option 2' , imgUrl: 'http:// fhdjsks.com'},
-        { id: 'o103', txt: 'Option 3' , imgUrl: 'http:// fhdjsks.com'},
-        { id: 'o104', txt: 'Option 4' , imgUrl: 'http:// fhdjsks.com'},
+        { id: 'o101', txt: 'Option 1', imgUrl: 'http:// fhdjsks.com', isCorrect: true },
+        { id: 'o102', txt: 'Option 2', imgUrl: 'http:// fhdjsks.com' },
+        { id: 'o103', txt: 'Option 3', imgUrl: 'http:// fhdjsks.com' },
+        { id: 'o104', txt: 'Option 4', imgUrl: 'http:// fhdjsks.com' },
       ],
     }
   ]
@@ -42,13 +42,17 @@ const quiz = {
 //           id: 'q101',
 //           quest: 'Question 1',
 //           opts: [
-//             { id: 'o101', txt: 'Option 1' , imgUrl: 'http:// fhdjsks.com', isCorrect: true},
+//             { id: 'o101', txt: 'Option 1' , imgUrl: 'http:// fhdjsks.com'},
 //             { id: 'o102', txt: 'Option 2' , imgUrl: ''}
 //           ],
 //         }
 //       ]
 //     }
-//   ]
+//   ],
+// quizEvalMap: {
+//   q101: '0102'
+//   q102: '0103'
+// }
 // }
 
 
@@ -58,10 +62,21 @@ const submission = {
   name: 'Puki ben David',
   email: 'puki@gmail.com',
   quizId: 't101',
-  answers: [
-    { qId: 'q101', ans: 0 },
-    { qId: 'q102', ans: 2 },
+  results: [
+    {
+      section: 'vue',
+      sectionResults: [
+        {
+          qusId: 'q101',
+          chosenOptId: 'o101',
+        }
+      ]
+    }
   ]
+  // answers: [
+  //   { qId: 'q101', ans: 0 },
+  //   { qId: 'q102', ans: 2 },
+  // ]
 }
 
 
