@@ -1,12 +1,11 @@
 <template>
   <div class="admin-page">
-    admin page
-    <div class="tabs">
-      <router-link to="/admin/quiz/edit">New Quiz</router-link> | 
-      <router-link to="/admin/submissions">Submissions</router-link> | 
-      <router-link to="/admin/templates">Templates</router-link> | 
+    <!-- <div class="tabs">
+      <router-link to="/admin/quiz/edit">New Quiz</router-link>  
+      <router-link to="/admin/submissions">Submissions</router-link>  
+      <router-link to="/admin/templates">Templates</router-link>  
       <router-link to="/admin/quiz/list">List</router-link>
-    </div>
+    </div> -->
     <router-view/>
   </div>
 </template>

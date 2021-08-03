@@ -1,0 +1,11 @@
+.admin-page{
+    .tabs{
+        display: flex;
+        flex-direction: column;
+        a{
+            padding: 15px 0 15px 35px;
+            border: 1px solid gray;
+            width: 15vw;
+        }
+    }
+}

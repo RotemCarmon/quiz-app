@@ -1,0 +1,52 @@
+.app-header {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    height: 10vh;
+    position: relative;
+    h1 {
+        font-size: 2rem;
+    }
+    nav {
+        a {
+            margin: 5px;
+            color: white;
+            padding: 8px 18px ;
+            font-size: .7rem;
+            border-radius: 4px;
+            background-color: #d8d6d6;
+            transition: all 0.4s;
+            background-color: #673ab7;
+            &:hover {
+                opacity: 0.7;
+                // color:rgb(22, 22, 22)
+            }
+        }
+    }
+    .tabs {
+        display: flex;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        a {
+            padding: 5px 7px 3px 7px;
+            color: gray;
+            border-bottom: 3px solid gray;
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+            margin: 0 1px;
+            font-size: .8rem;
+            // width: 15vw;
+        }
+        a.router-link-exact-active{
+            color: #673ab7;
+            border-color: #673ab7;
+        }
+    }
+    .el-tabs__header{
+        margin-bottom: 0;
+    }
+}

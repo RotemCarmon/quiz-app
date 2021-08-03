@@ -1,5 +1,5 @@
 <template>
-    <section> 
+    <section class="main-container"> 
         <div v-for="quiz in quizzes" :key="quiz._id">
             <router-link :to="'/quiz/' + quiz._id">{{quiz.title}}</router-link>
         </div>

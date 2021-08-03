@@ -104,7 +104,7 @@ function getEmptyQuest() {
 function getEmptyOpt() {
     return {
         id: _makeId(),
-        txt: 'Option',
+        txt: 'Option 1',
         imgUrl: ''
     }
 }

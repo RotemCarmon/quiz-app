@@ -1,10 +1,11 @@
-.quiz.edit {
+.quiz-edit {
     input {
         border: none;
-        border-bottom: 3px solid gainsboro;
+        border-bottom: 2.5px solid gainsboro;
         transition: all 0.3s;
         outline: none;
         padding: 15px;
+        border-radius: 4px;
     }
     input:focus {
         // border-bottom: 2px solid rgb(179, 4, 179);
@@ -16,16 +17,17 @@
     }
 }
 .quiz-edit-item-container {
-    border: 1px solid gray;
+    background-color: #fff;
+    // border: 1px solid gray;
     display: flex;
     flex-direction: column;
     border-radius: 5px;
-    width: 45vw;
-    margin: 0 auto;
+    
     padding: 20px;
     margin-bottom: 15px;
 }
 .title-container {
+    border-top: 10px solid #673ab7 ;
     .title {
         height: 4rem;
         font-size: 2.5rem;
@@ -37,11 +39,26 @@
 }
 .question-container {
     .question {
-        // height: 1rem;
-        // font-size: 2.5rem;
         margin-bottom: 10px;
     }
     .option {
         margin-bottom: 10px;
+    }
+    .option-radio{
+        margin: 0;
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+    .add-option, .options{
+        display: flex;
+        align-items: center;
+        .option{
+            flex: 1;
+        }
+    }
+    .add-option{
+        input:focus{
+            border:none;
+        }
     }
 }

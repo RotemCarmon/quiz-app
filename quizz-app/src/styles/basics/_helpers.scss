@@ -8,3 +8,8 @@
 .ratio-card { @include aspect-ratio(100, 80); }
 
 .ratio-poster { @include aspect-ratio(100, 150); }
+
+.main-container{
+    width: 40vw;
+    margin: 0 auto;
+}

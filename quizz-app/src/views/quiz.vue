@@ -1,5 +1,5 @@
 <template>
-  <section class="qui-container" v-if="quiz">
+  <section class="qui-container main-container" v-if="quiz">
     <form @submit.prevent="onSubmitQuiz" class="quiz">
       <div class="title">{{quiz.title}}</div>
       <article class="quiz-section" v-for="section in quiz.sections" :key="section.id">
