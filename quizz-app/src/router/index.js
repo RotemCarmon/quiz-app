@@ -33,7 +33,7 @@ const routes = [
     component: admin,
     children:[
       {
-        path:'quiz/edit',
+        path:'quiz/edit/:quizId?',
         name:'Quiz Edit',
         component: quizEdit
       },

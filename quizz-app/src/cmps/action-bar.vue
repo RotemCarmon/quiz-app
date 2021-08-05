@@ -1,15 +1,22 @@
 <template>
   <div class="action-bar">
-      <button>Add question</button>
-      <button>Add section</button>
+      <button @click.stop="addQuest">Add question</button>
+      <button @click.stop="addSection">Add section</button>
       <button>Add image</button>
       <button>Add video</button>
-      <button>delete</button>
+      <button>Delete</button>
   </div>
 </template>
 
 <script>
 export default {
-
+    methods: {
+        addQuest(){
+            this.$emit('addQuest')
+        },
+        addSection(){
+            this.$emit('addSection')
+        },
+    },
 }
 </script>

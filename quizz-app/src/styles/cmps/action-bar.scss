@@ -1,0 +1,14 @@
+.action-bar {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    top: 0;
+    transform: translateX(100%);
+    button {
+        margin: 5px;
+    }
+    button:first-of-type {
+        margin-top:0;
+    }
+}

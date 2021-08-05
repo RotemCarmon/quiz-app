@@ -9,7 +9,7 @@
       <router-link to="/admin/quiz/edit">New Quiz</router-link>
       <router-link to="/admin/submissions">Submissions</router-link>
       <router-link to="/admin/templates">Templates</router-link>
-      <router-link to="/admin/quiz/list">List</router-link>
+      <!-- <router-link to="/admin/quiz/list">List</router-link> -->
     </div>
   </header>
 </template>

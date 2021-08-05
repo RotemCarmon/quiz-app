@@ -1,4 +1,6 @@
 .quiz-edit {
+    width: 60vw;
+    margin: 0 auto;
     input {
         border: none;
         border-bottom: 2.5px solid gainsboro;
@@ -17,6 +19,7 @@
     }
 }
 .quiz-edit-item-container {
+    position: relative;
     background-color: #fff;
     // border: 1px solid gray;
     display: flex;
