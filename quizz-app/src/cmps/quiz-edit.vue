@@ -1,5 +1,5 @@
 <template>
-  <div class="quiz-edit main-container">
+  <div class="quiz-edit quiz-container">
     <input
       v-model="quizToEdit.title"
       class="quiz-title"
@@ -19,7 +19,7 @@
           Add Question
         </button>
         <div
-          class="quiz-edit-item-container title-container"
+          class="quiz-item-container title-container"
           :class="{ selected: selectedItem === section.id }"
           @click="clicked(section.id)"
         >
@@ -44,7 +44,7 @@
         <div
           v-for="(quest, questIdx) in section.quests"
           :key="quest.id"
-          class="quiz-edit-item-container question-container"
+          class="quiz-item-container question-edit-container"
           :class="{ selected: selectedItem === quest.id }"
           @click="clicked(quest.id)"
         >

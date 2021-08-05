@@ -1,11 +1,17 @@
 <template>
-  <section class="qui-container main-container" v-if="quiz">
+  <section class="quiz-container center" v-if="quiz">
     <form @submit.prevent="onSubmitQuiz" class="quiz">
-      <div class="title">{{quiz.title}}</div>
+      <div class="quiz-title">
+        <h2>{{quiz.title}}</h2>
+        <h4 v-if="quiz.desc">{{quiz.desc}}</h4>
+        </div>
       <article class="quiz-section" v-for="section in quiz.sections" :key="section.id">
-        <h2 class="quiz-section-title">{{section.title}}</h2>
-        <h3 v-if="section.desc">{{section.desc}}</h3>
-        <div class="quiz-question" v-for="quest in section.quests" :key="quest.id">
+        <div class="title-container quest-container">
+          <h3>{{section.title}}</h3>
+          <div></div>
+          <h4 v-if="section.desc">{{section.desc}}</h4>
+        </div>
+        <div class="quest-container" v-for="quest in section.quests" :key="quest.id">
          <h3>{{quest.txt}}</h3>
          <ul >
            <li v-for="opt in quest.opts" :key="opt.id">

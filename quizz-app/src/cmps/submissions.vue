@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container">
+  <div class="submission">
     <h1>submissions</h1>
   </div>
 </template>

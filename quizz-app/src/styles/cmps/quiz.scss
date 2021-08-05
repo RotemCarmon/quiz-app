@@ -1,0 +1,36 @@
+.quiz-container {
+
+
+    .quiz {
+        margin-top: 3em;
+
+        .quiz-title {
+            background-color: #fff;
+            font-size: 2rem;
+            padding: 0.5em;
+            margin-bottom: 1.3em;
+            border-radius: 5px;
+        }
+
+        .quiz-section {
+            margin-bottom: 5em;
+        }
+
+
+        .title-container {
+
+            h3 {
+                padding-bottom: .625rem;
+            }
+
+            div {
+                border-top: 0.1px solid #673ab7;
+            }
+
+            h4 {
+                padding-top: .625rem;
+            }
+        }
+
+    }
+}

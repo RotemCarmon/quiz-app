@@ -1,12 +1,24 @@
 <template>
-  <div class="main-container">
-    <h1>templates</h1>
-  </div>
+    <section class="main-container"> 
+        <div v-for="quiz in quizzes" :key="quiz._id">
+            <router-link :to="'/quiz/' + quiz._id">{{quiz.title}}</router-link>
+        </div>
+    </section>
 </template>
 
 <script>
-export default {};
-</script>
+export default {
+  computed: {
+    quizzes(){
+        console.log(this.$store.getters.quizzesForShow);
+      return this.$store.getters.quizzesForShow
+    }
+  },
+  created() {
 
-<style>
-</style>
+    this.$store.dispatch({
+      type: "loadQuizzes",
+    });
+  },
+}
+</script>

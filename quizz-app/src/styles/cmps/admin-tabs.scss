@@ -1,0 +1,48 @@
+.admin-tabs {
+    background-color: #fff;
+    margin: 0;
+    padding-top: 2em;
+
+    li {
+        a {
+            display: block;
+            height: 100%;
+            padding: 0.6em;
+            padding-left: 2em;
+            border-top-right-radius: 2em;
+            border-bottom-right-radius: 2em;
+            transition: background-color 0.5s;
+            cursor: pointer;
+            color: #2f3132;
+
+            &:hover {
+                background-color: #f1f3f4;
+            }
+
+            &:active {
+                background-color: #d6d6d6;
+            }
+
+        }
+
+        .router-link-active {
+            background-color: #f0ebf8;
+            color: #673ab7;
+            font-weight: 600;
+
+            &:hover {
+                background-color: #eadeff;
+            }
+
+            // background-color: #fbe8e6;
+            // color: #d42928;
+            // font-weight: 600;
+
+            // &:hover {
+            //     background-color: #fbe8e6;
+            // }
+
+        }
+
+    }
+}

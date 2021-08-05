@@ -10,6 +10,9 @@
 @import 'basics/layout';
 
 // COMPONENTS
+@import 'cmps/quest';
 @import 'cmps/quiz-edit';
+@import 'cmps/quiz';
 @import 'cmps/app-header';
-// @import 'cmps/admin-page';
+@import 'cmps/admin-page';
+@import 'cmps/admin-tabs';

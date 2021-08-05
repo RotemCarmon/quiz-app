@@ -9,7 +9,10 @@
 
 .ratio-poster { @include aspect-ratio(100, 150); }
 
-.main-container{
-    width: 40vw;
-    margin: 0 auto;
+
+// Layout helpers
+
+.center {
+    grid-column: 2/3;
+    grid-row: 2/3;
 }
