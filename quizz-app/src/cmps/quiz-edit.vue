@@ -7,8 +7,8 @@
         type="text"
         placeholder="Quiz title"
         @focus="$event.target.select()"
-        @input="saveQuiz()"
       />
+      <!-- @input="saveQuiz()" -->
       <form>
         <div
           class="section"
@@ -31,16 +31,16 @@
               type="text"
               placeholder="Section title"
               @focus="$event.target.select()"
-              @input="saveQuiz()"
             />
+            <!-- @input="saveQuiz()" -->
             <input
               v-model="quizToEdit.sections[sectionIdx].desc"
               class="description"
               type="text"
               placeholder="Section description"
               @focus="$event.target.select()"
-              @input="saveQuiz()"
             />
+            <!-- @input="saveQuiz()" -->
           </div>
           <div
             v-for="(quest, questIdx) in section.quests"
@@ -60,8 +60,8 @@
               placeholder="Question"
               v-model="quizToEdit.sections[sectionIdx].quests[questIdx].txt"
               @focus="$event.target.select()"
-              @input="saveQuiz()"
             />
+            <!-- @input="saveQuiz()" -->
             <div
               class="options"
               v-for="(opt, optIdx) in quest.opts"
@@ -84,8 +84,8 @@
                     .txt
                 "
                 @focus="$event.target.select()"
-                @input="saveQuiz()"
               />
+              <!-- @input="saveQuiz()" -->
             </div>
             <div class="add-option">
               <input class="option-radio" type="radio" disabled />
@@ -112,11 +112,13 @@ import html2canvas from "html2canvas";
 import { utilService } from "../services/util.service.js";
 import actionBar from "./action-bar.vue";
 import { quizService } from "../services/quiz.service.js";
+import { showMsg } from "../services/eventBus.service.js";
 export default {
   data() {
     return {
       quizToEdit: quizService.getEmptyQuiz(),
       selectedItem: null,
+      screenRef: null,
     };
   },
   computed: {
@@ -133,7 +135,8 @@ export default {
     },
     async saveQuiz() {
       this.quizToEdit.thumbnail = await this.printScr();
-      this.$store.dispatch({ type: "saveQuiz", quiz: this.quizToEdit });
+      await this.$store.dispatch({ type: "saveQuiz", quiz: this.quizToEdit });
+      showMsg("Quiz saved");
     },
     addSection(sectionIdx, questIdx) {
       const newSection = quizService.getEmptySection();
@@ -182,7 +185,8 @@ export default {
     },
     async printScr() {
       try {
-        const canvas = await html2canvas(this.$refs.screen);
+        console.log("this.screenRef:", this.screenRef);
+        const canvas = await html2canvas(this.screenRef);
         const pageImg = canvas.toDataURL();
         return await utilService.uploadImg(pageImg);
       } catch (err) {
@@ -195,8 +199,18 @@ export default {
       this.loadQuiz();
     },
   },
+  mounted() {
+    this.screenRef = this.$refs.screen;
+  },
   created() {
     this.loadQuiz();
+  },
+  async beforeDestroy() {
+    try {
+      await this.saveQuiz();
+    } catch (err) {
+      console.log("err:", err);
+    }
   },
   components: {
     actionBar,
