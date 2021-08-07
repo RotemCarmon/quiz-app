@@ -54,12 +54,13 @@
 
 #app {
     display: grid;
-    grid-template-columns: 250px 1fr 250px;
+    grid-template-columns: 1fr 1080px 1fr;
     grid-template-rows: auto 1fr;
 }
 
 .quiz-container {
-    margin: auto;
+    margin: 0 auto;
     padding-bottom: 64px;
-    width: 770px;
+    width: 640px;
+    margin-top: 3em;
 }

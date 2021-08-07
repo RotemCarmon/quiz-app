@@ -20,10 +20,10 @@ export const quizService = {
 
 async function query() {
     let quizs = await storageService.query(QUIZ_DB)
-    // if (!quizs || !quizs.length) {
-    //     quizs = gQuizs
-    //     _saveToStorage(gQuizs)
-    // }
+    if (!quizs || !quizs.length) {
+        quizs = gQuizs
+        _saveToStorage(gQuizs)
+    }
     console.log(quizs, 'quizs');
     return quizs
     // return httpService.get(QUIZ_URL, isMinimized)
