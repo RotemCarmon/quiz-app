@@ -1,0 +1,23 @@
+.templates{
+    width: 60vw;
+    margin-top: 20px;
+    .template-list{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .template-preview{
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            color: black;
+            width: 208px;
+            height: 169px;
+            img{
+                flex: 1;
+            }
+            .template-info{
+                padding: 10px 20px;
+            }
+        }
+    }
+}

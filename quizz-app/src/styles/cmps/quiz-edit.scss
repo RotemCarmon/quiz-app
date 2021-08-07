@@ -1,4 +1,6 @@
 .quiz-edit {
+    width: 770px;
+    
     input {
         border: none;
         border-bottom: 2.5px solid gainsboro;
@@ -7,39 +9,69 @@
         padding: 15px;
         border-radius: 4px;
     }
+
     input:focus {
         // border-bottom: 2px solid rgb(179, 4, 179);
-        border-color:#673ab7;
+        border-color: #673ab7;
         background-color: #f8f9fa;
     }
-    input.quiz-title,input.option{
+
+    input.quiz-title,
+    input.option {
         padding: 5px;
     }
 }
 
+.quiz-edit-item-container {
+    position: relative;
+    background-color: #fff;
+    // border: 1px solid gray;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
 
-.question-edit-container {
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.title {
+    height: 4rem;
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+}
+
+.description {
+    height: 2rem;
+}
+
+.question-container {
     .question {
         margin-bottom: 10px;
     }
+
     .option {
         margin-bottom: 10px;
     }
-    .option-radio{
+
+    .option-radio {
         margin: 0;
         margin-bottom: 10px;
         margin-right: 10px;
     }
-    .add-option, .options{
+
+    .add-option,
+    .options {
         display: flex;
         align-items: center;
-        .option{
+
+        .option {
             flex: 1;
         }
     }
-    .add-option{
-        input:focus{
-            border:none;
+
+    .add-option {
+        input:focus {
+            border: none;
         }
     }
 }
